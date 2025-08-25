@@ -1,4 +1,5 @@
 import openpyxl
+import json
 import pandas as pd
 from datetime import datetime
 import streamlit as st
@@ -7,7 +8,9 @@ from oauth2client.service_account import ServiceAccountCredentials
 
 
 scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
-creds = ServiceAccountCredentials.from_json_keyfile_name('sawo.json', scope)
+creds_dict = dict(st.secrets['gspread'])
+creds = ServiceAccountCredentials.from_json_keyfile_dict(creds_dict, scope)
+
 
 client = gspread.authorize(creds)
 sheet = client.open('Choco_primo_database').sheet1
