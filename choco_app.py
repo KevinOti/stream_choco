@@ -10,13 +10,12 @@ from oauth2client.service_account import ServiceAccountCredentials
 scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
 
 
-creds_dict = dict(st.secrets['gspread'])
-creds = ServiceAccountCredentials.from_json_keyfile_dict(creds_dict, scope)
-
+creds = ServiceAccountCredentials.from_json_keyfile_name('sawo.json', scope)
 
 
 client = gspread.authorize(creds)
 sheet = client.open('Choco_primo_database').sheet1
+
 
 
 st.title('Choco Primo Activation')
