@@ -9,8 +9,10 @@ from oauth2client.service_account import ServiceAccountCredentials
 
 scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
 
+creds_dict = st.secrets['google_service_account']
+cred_json = json.dumps(creds_dict)
 
-creds = ServiceAccountCredentials.from_json_keyfile_name('sawo.json', scope)
+creds = ServiceAccountCredentials.from_json_keyfile_dict(json.loads(creds_dict), scope)
 
 
 client = gspread.authorize(creds)
