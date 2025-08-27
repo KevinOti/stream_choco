@@ -52,16 +52,21 @@ if sales <= 0:
      st.warning("Sales can't be zero")
 else:
      row.extend([
-         timestamp,
-         selected_chain,
-         selected_outlet,
-         selected_product,
-         selected_category,
-         sales
+         str(timestamp),
+         str(selected_chain),
+         str(selected_outlet),
+         str(selected_product),
+         str(selected_category),
+         str(sales)
      ])
 
 # # buttons
      if st.button("Submit Activation"):
-         sheet.append_row(row)
-         st.success(f"Recorded {sales} pieces of {selected_product} at {selected_outlet} on {timestamp}")
+          try:
+              sheet.append_row(row)
+              st.success(f"Recorded {sales} pieces of {selected_product} at {selected_outlet} on {timestamp}")
+          except Exception as e:
+              st.error(f"Submission failed: {e}")
+     
+
 
